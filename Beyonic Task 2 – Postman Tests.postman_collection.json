@@ -1,0 +1,911 @@
+{
+	"info": {
+		"_postman_id": "a64afa22-ed07-46be-8484-e71c00be51a1",
+		"name": "Beyonic Task 2 – Postman Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "collectionrequests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 1717\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(1717);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/collectionrequests?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/collectionrequests?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty and value of organization is\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].organization).to.eql(4)\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/collectionrequests",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"collectionrequests"
+					]
+				},
+				"description": "Collection Requests allow you to notify a customer to send funds to you. When you create a collection request, we send a notification to the customer, with instructions on how to fulfill the request. When they send the funds, a collection object shall be created and matched with the collection request.\n\nTo retrieve a list of all collections, make a GET request to the collections endpoint. This will return a list of collection request objects.\n\n[https://apidocs.beyonic.com/docs/collection-requests-api](https://apidocs.beyonic.com/docs/collection-requests-api)"
+			},
+			"response": []
+		},
+		{
+			"name": "collections",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 70\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(70);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/collections?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/collections?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].currency).to.eql(\"UGX\")\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/collections",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"collections"
+					]
+				},
+				"description": "Beyonic uses the term “Collections” for payments you receive (or collect) from mobile subscribers. When the user sends in payment, it will create a collection object that you can access via the Collections API using the methods shown below.\n\nTo retrieve a list of all collections, make a GET request to the collections endpoint. This will return a list of collection objects.\n\n[https://apidocs.beyonic.com/docs/collections-api](https://apidocs.beyonic.com/docs/collections-api)"
+			},
+			"response": []
+		},
+		{
+			"name": "payments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 209\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(209);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/payments?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/payments?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].payment_type).to.eql(\"money\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/payments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"payments"
+					]
+				},
+				"description": "The Payments API allows you to send funds or airtime to a mobile subscriber or funds to a bank account.\n\nTo return a list of all payments, make a GET request to the payments endpoint. This will return a list of payment objects.\n\n[https://apidocs.beyonic.com/docs/payments-api](https://apidocs.beyonic.com/docs/payments-api)"
+			},
+			"response": []
+		},
+		{
+			"name": "accounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 19\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(19);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/accounts?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/accounts?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].account_type).to.eql(\"Domestic\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/accounts",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"accounts"
+					]
+				},
+				"description": "Accounts hold your funds. The accounts api method allows you to list your accounts and view balances for each account.\n\nTo retrieve a list of all accounts, make a GET request to the accounts end point. This will return a list of accounts.\n\n[https://apidocs.beyonic.com/docs/accounts-1](https://apidocs.beyonic.com/docs/accounts-1)"
+			},
+			"response": []
+		},
+		{
+			"name": "transactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 688\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(688);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/transactions?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/transactions?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].fee_transaction).to.eql(null);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/transactions",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"transactions"
+					]
+				},
+				"description": "Transactions are funds movements that happened to your account. This includes Mobile Payments, Airtime Payments, Collections, Service Charges, Account Balance Funds Update.The transactions API allows you to list all these transactions.\n\nTo retrieve a list of all transactions, make a GET request to the transactions endpoint. This will return a list of transactions.\n\n[https://apidocs.beyonic.com/docs/transactions](https://apidocs.beyonic.com/docs/transactions)"
+			},
+			"response": []
+		},
+		{
+			"name": "contacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 2083\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(2083);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/contacts?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/contacts?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].name_on_network).to.eql(\"Insufficient Data Or Too Low Score\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/contacts",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"contacts"
+					]
+				},
+				"description": "Contacts represent people whom you can send payments to, or receive payments from. The contacts API method allows you to add, retrieve, list, and update contacts in your Beyonic account. Contacts are also added automatically whenever you send a payment to a new phone number.\n\nTo retrieve a list of all contacts, make a GET request to the contact endpoint. This will return a list of contacts\n\n[https://apidocs.beyonic.com/docs/contacts](https://apidocs.beyonic.com/docs/contacts)"
+			},
+			"response": []
+		},
+		{
+			"name": "events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 3751\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(3751);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/events?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/events?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].content_type).to.eql(95);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/events",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"events"
+					]
+				},
+				"description": "Events track certain changes that happen to your Beyonic account. Events are created automatically when certain changes occur, and you can use them to stay informed about the changes. For example, when a new contact is created, we will create a “contact.created” event.\n\nYou can use the events API to retrieve information about recent events.\n\nTo retrieve a list of all events, make a GET request to the events end point. This will return a list of events.\n\n[https://apidocs.beyonic.com/docs/events](https://apidocs.beyonic.com/docs/events)"
+			},
+			"response": []
+		},
+		{
+			"name": "webhooks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 34\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(34);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/webhooks?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/webhooks?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].event).to.eql(\"payment.status.changed\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/webhooks",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"webhooks"
+					]
+				},
+				"description": "Webhooks or callback URLs allow you to define URLs on your server that notifications should be sent to when specific events occur in your Beyonic account.\n\nTo retrieve a list of all webhooks, make a GET request to the webhooks endpoint. This will return a list of webhooks objects.\n\n[https://apidocs.beyonic.com/docs/webhooks](https://apidocs.beyonic.com/docs/webhooks)"
+			},
+			"response": []
+		},
+		{
+			"name": "banks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 57\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(57);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/banks?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/banks?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].swift_code).to.eql(null);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/banks",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"banks"
+					]
+				},
+				"description": "This API allows the users to check which banks are supported by the Beyonic API. These banks are supported for payments (outgoing) from local wallets. Payments from cross border wallets are not yet allowed to banks.\n\nTo retrieve a list of all banks, make a GET request to the banks end point. This will return a list of banks.\n\n[https://apidocs.beyonic.com/docs/banks](https://apidocs.beyonic.com/docs/banks)"
+			},
+			"response": []
+		},
+		{
+			"name": "currencies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains count and value of count field is 14\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+							"    pm.expect(jsonData.count).to.eql(14);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Body contains next and value of next is https://api.beyonic.com/api/currencies?limit=10&offset=10\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"next\");\r",
+							"     pm.expect(jsonData.next).to.eql(\"https://api.beyonic.com/api/currencies?limit=10&offset=10\");\r",
+							"  });\r",
+							"\r",
+							"pm.test(\"Body contains previous and value of previous null\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"previous\");\r",
+							"    pm.expect(jsonData.previous).to.eql(null);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains results\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"results\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"results is an array that is not empty\", function () {\r",
+							"     pm.expect(jsonData.results).to.be.an(\"array\");\r",
+							"     pm.expect(jsonData.results.length).to.not.eql(0);\r",
+							"     pm.expect(jsonData.results[0].code).to.eql(\"GNF\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "ab594c14986612f6167a975e1c369e71edab6900",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/currencies",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"currencies"
+					]
+				},
+				"description": "The Currencies API method allows you to list the currencies supported by Beyonic, including information like phone country codes associated with each currency.\n\nTo retrieve a list of all currencies, make a GET request to the currencies end point. This will return a list of currencies.  \n  \n[https://apidocs.beyonic.com/docs/currencies](https://apidocs.beyonic.com/docs/currencies)"
+			},
+			"response": []
+		},
+		{
+			"name": "networks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/networks",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"networks"
+					]
+				},
+				"description": "The Networks API method allows you to list the networks supported by Beyonic, including information like network prefixes for each network/country. These are the networks available for domestic transactions. The networks available for cross border transactions will be different. Please contact support to get an updated list of networks available for cross border transactions.\n\nTo retrieve a list of all networks, make a GET request to the network's endpoint. This will return a list of networks.\n\n[https://apidocs.beyonic.com/docs/networks](https://apidocs.beyonic.com/docs/networks)"
+			},
+			"response": []
+		},
+		{
+			"name": "countries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "ab594c14986612f6167a975e1c369e71edab6900",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/countries",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"countries"
+					]
+				},
+				"description": "The countrie's endpoint doesnt exist in Beyonic"
+			},
+			"response": []
+		},
+		{
+			"name": "organizations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "ab594c14986612f6167a975e1c369e71edab6900",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"url": {
+					"raw": "https://api.beyonic.com/api/organizations",
+					"protocol": "https",
+					"host": [
+						"api",
+						"beyonic",
+						"com"
+					],
+					"path": [
+						"api",
+						"organizations"
+					]
+				},
+				"description": "The organization's endpoint doesn't exist in Beyonic"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "details",
+			"value": ""
+		}
+	]
+}
